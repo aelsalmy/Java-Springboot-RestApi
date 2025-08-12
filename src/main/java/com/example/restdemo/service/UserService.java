@@ -77,6 +77,9 @@ public class UserService {
         }
 
         if(dto.email() != null){
+            if(userRepo.existsByEmail(dto.email())){
+                throw new UserAlreadyExistsException(dto.email());
+            }
             user.setEmail(dto.email());
         }
 
